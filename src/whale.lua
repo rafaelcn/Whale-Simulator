@@ -1,83 +1,49 @@
 whale = {}
 
 function whale.load()
-   whale.isHurt = false
-   whale.hurtRemaining = 0
-   whale.x = 400
-   whale.y = 300
-   whale.dir = 0
-   whale.speed = 50
-   whale.hunger = 100
-   whale.health = 100
-   local whale_sprite = love.graphics.newImage("assets/textures/whale.png")
-   whale_sprite:setFilter("nearest", "nearest")
-	whale_anim = newAnimation(whale_sprite, 32, 64, 1, 3)
-   local whale_spr = love.graphics.newImage("assets/textures/whale.png")
-   whale_spr:setFilter("nearest", "nearest")
-	whale_anim = newAnimation(whale_spr, 32, 64, 1, 3)
+   	whale.isHurt = false
+   	whale.hurtRemaining = 0
+   	whale.x = 400
+   	whale.y = 300
+   	whale.dir = 0
+   	whale.speed = 50
+   	whale.hunger = 100
+   	whale.health = 100
+   	local whale_sprite = love.graphics.newImage("assets/textures/whale.png")
+   	--whale_sprite:setFilter("nearest", "nearest")
+	--whale_anim = newAnimation(whale_sprite, 32, 64, 1, 3)
 end
 
 function whale.draw()
-   if whale.isHurt then
-      love.graphics.setColor(255, 0, 0)
-   else
-      love.graphics.setColor(255, 255, 255)
-   end
-   
-	if whale.dir == "n" then
-      whale_anim:draw(whale.x, whale.y, 0, 1, 1, 16, 32)
-	elseif whale.dir == "s" then
-      whale_anim:draw(whale.x, whale.y, 3.1415926535898, 1, 1, 16, 32)
-	elseif whale.dir == "w" then
-      whale_anim:draw(whale.x, whale.y, -1.5707963267949, 1, 1, 16, 32)
-	elseif whale.dir == "e" then
-	  whale_anim:draw(whale.x, whale.y, 1.5707963267949, 1, 1, 16, 32)
-	elseif whale.dir == "ne" then
-      whale_anim:draw(whale.x, whale.y, 0.78539816339745, 1, 1, 16, 32)
-	elseif whale.dir == "se" then
-      whale_anim:draw(whale.x, whale.y, 2.3561944901923, 1, 1, 16, 32)
-	elseif whale.dir == "sw" then
-      whale_anim:draw(whale.x, whale.y, -2.3561944901923, 1, 1, 16, 32)
-	elseif whale.dir == "nw" then
-      whale_anim:draw(whale.x, whale.y, -0.78539816339745, 1, 1, 16, 32)
-	else
-      whale_anim:draw(whale.x, whale.y, 0, 1, 1, 16, 32)
+   	if whale.isHurt then
+   	   love.graphics.setColor(255, 0, 0)
+   	else
+   	   love.graphics.setColor(255, 255, 255)
+   	end
+	
+	local whaleImage = love.graphics.newImage("assets/textures/simple_whale.png")
+	
+	if debug == true then
+		love.graphics.print("atan2: ", 10, 40)
+		love.graphics.print(angle, 100, 40)
+		love.graphics.print("MouseX: ", 10, 60)
+		love.graphics.print(mouseX, 100, 60)
+		love.graphics.print("MouseY: ", 10, 80)
+		love.graphics.print(mouseY, 100, 80)
 	end
+
+	love.graphics.draw(whaleImage, whale.x, whale.y, angle, 1, 1, 16, 32)
+	
 end
 
 function whale.update(dt)
-   --[[ swingers.update()
-   if swingers.checkGesture() then
-   	gesture = swingers.getExtGesture()
-   end ]]
-   
-   --[[ if gesture[1] ~= nil then
-      whale.dir = gesture[1]
-   end
-   
-	if whale.dir == "n" then
-	   whale.y = whale.y - (whale.speed*dt)
-   elseif whale.dir == "s" then
-	   whale.y = whale.y + (whale.speed*dt)
-	elseif whale.dir == "w" then
-	   whale.x = whale.x - (whale.speed*dt)
-   elseif whale.dir == "e" then
-      whale.x = whale.x + (whale.speed*dt)
-   elseif whale.dir == "ne" then
-      whale.y = whale.y - math.sin(whale.speed*dt)
-      whale.x = whale.x + math.sin(whale.speed*dt)
-   elseif whale.dir == "se" then
-      whale.y = whale.y + math.sin(whale.speed*dt)
-      whale.x = whale.x + math.sin(whale.speed*dt) -- THIS IS WRONG!
-   elseif whale.dir == "sw" then
-      whale.y = whale.y + math.sin(whale.speed*dt)
-      whale.x = whale.x - math.sin(whale.speed*dt)
-   elseif whale.dir == "nw" then
-      whale.y = whale.y - math.sin(whale.speed*dt)
-      whale.x = whale.x - math.sin(whale.speed*dt)
-   end ]]
-   whale_anim:update(dt)
-	--swingers.checkError()
+	--whale_anim:update(dt)
+	
+	mouseX = love.mouse.getX()
+	mouseY = love.mouse.getY()
+
+	angle = math.atan2(mouseY-whale.y, mouseX-whale.x)
+
 	
 
 	if whale.x < 0 then

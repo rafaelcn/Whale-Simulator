@@ -2,7 +2,6 @@
 
 ]]
 
-require("libs/swingers")
 require("libs/AnAL")
 require("title")
 require("credits")
@@ -14,11 +13,8 @@ gui = require "libs/GUI"
 debug = false
 
 function love.load()
-   state = "title"
-   
-   swingers.start()
-   gesture = {}
-   
+   state = "game"
+     
    game.load()
    title.load()
    credits.load()

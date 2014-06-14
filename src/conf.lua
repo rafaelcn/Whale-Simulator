@@ -3,8 +3,9 @@ function love.conf(t)
     t.author = "DaemonLee, MrWhales or Skunk_Giant, Rafael C. Nunes or ranu."
     t.url = "The Escapecraft.net forums or the Escapecraft IRC server"
     t.identity = nil                   -- The name of the save directory (string)
-    t.version = "0.9.1"                -- The LÖVE version this game was made for (string)
-    t.console = false                  -- Attach a console (boolean, Windows only)
+    --t.version = "0.9.1"                -- The LÖVE version this game was made for (string)
+	t.verion = "0.8.0"				   -- LÖVE on my computer is 0.8.0 (ranu)    
+	t.console = false                  -- Attach a console (boolean, Windows only)
 
     t.window.icon = nil                -- Filepath to an image to use as the window's icon (string)
     t.window.width = 800               -- The window width (number)
