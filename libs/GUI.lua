@@ -8,15 +8,18 @@ button = {}
 local F = {}
 
 function F.newButton(text, x, y, id)
-	table.insert(button, {text = text, x = x, y = y, id = id})
+	table.insert(button, {text = text, x = x, y = y, id = id, mouseOver = false})
 end
 
 -- This function draw all the buttons of the button table onto the screen
 function F.buttonDraw()
 	for key,value in ipairs(button) do
-		love.graphics.setColor(242, 242, 242)
+		if value.mouseOver == false then
+			love.graphics.setColor(242, 242, 242)
+		elseif value.mouseOver == true then
+			love.graphics.setColor(0, 0, 0)
+		end	
 		love.graphics.setFont(openSans)
-		-- render everything on the center of the X axis passed to newButton.
 		love.graphics.printf(value.text, value.x, value.y, 250, 'center')
 	end
 end
@@ -40,13 +43,29 @@ function F.buttonClick(x, y)
 			if value.id == "quit" then
 				love.event.push("quit")
 			end
+			
+			if value.id == "menu" then
+				state = "title"
+			end
 
+			if value.id == "ressurect" then
+				state = "game"
+			end
 		end
 	end
 end
 
 function F.buttonHover()
-	
+	for key, value in ipairs(button) do
+		if mouseX > value.x 
+		and mouseX < value.x + openSans:getWidth(value.text)
+		and mouseY > value.y 
+		and mouseY < value.y + openSans:getHeight(value.text) then
+			value.mouseOver = true
+		else
+			value.mouseOver = false
+		end
+	end
 end
 
 return F

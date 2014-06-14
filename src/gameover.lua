@@ -1,17 +1,24 @@
 gameover = {}
 
 function gameover.load()
+	if state == "gameover" then
+		gui.newButton("Ressurect!", 100, 200, "ressurect")
+		gui.newButton("Back to menu", 360, 200, "menu")
+	end
 end
 
 function gameover.draw()
-   love.graphics.printf("Oh whale, you've been krilled!\n\n\nSwipe up to be resurrected by the great whale gods!\n\n\n^\nI\nI\nI\nI\nI\nI", 0, 150, 800, "center")
+  	love.graphics.printf("Oh whale, you've been krilled!\n\n", 0, 150, 800, "center")
+	
+	if state == "gameover" then
+		gui.buttonDraw()
+	end
 end
 
 function gameover.update(dt)
   	--[[ swingers.update()
 	if swingers.checkGesture() then
 		gesture = swingers.getExtGesture()
-<<<<<<< HEAD
   	end
    	if gesture[1] == "n" then
     	state = "title"
@@ -21,12 +28,5 @@ function gameover.update(dt)
 	]]
 
 	-- TODO: A resurrect and a back to menu button.
-=======
-   end
-   if gesture[1] == "n" then
-      state = "title"
-      game.load()
-   end
-		swingers.checkError()
->>>>>>> 971268bf71665a49e67ae958d475c57385887019
+	gui.buttonHover()
 end

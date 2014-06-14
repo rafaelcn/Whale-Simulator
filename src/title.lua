@@ -7,14 +7,16 @@ title = {}
 local menu = {newGame = "NEW GAME", credits="CREDITS", options = "OPTIONS", exit = "QUIT"}
 
 function title.load()
+	openSansSmall = love.graphics.newFont("assets/fonts/OpenSans-Regular.ttf", 20)
 	openSans = love.graphics.newFont("assets/fonts/OpenSans-Regular.ttf", 30)
 	openSansBold = love.graphics.newFont("assets/fonts/OpenSans-Bold.ttf", 30);
-   	love.graphics.setFont(openSansBold)
+   	
+	love.graphics.setFont(openSansBold)
 
-	gui.newButton(menu.newGame, 380, 300, "start") 
-	gui.newButton(menu.options, 380, 340, "options")
-	gui.newButton(menu.credits, 380, 380, "credits")
-	gui.newButton(menu.exit, 380, 420, "quit")
+	gui.newButton(menu.newGame, 300, 300, "start") 
+	gui.newButton(menu.options, 300, 340, "options")
+	gui.newButton(menu.credits, 300, 380, "credits")
+	gui.newButton(menu.exit, 300, 420, "quit")
 end
 
 function title.draw()
@@ -55,6 +57,12 @@ function title.update(dt)
    elseif gesture[1] == "s" then
    end
 		swingers.checkError() ]]
+
+	mouseX = love.mouse.getX()
+	mouseY = love.mouse.getY()
+
+	-- check for button hover
+	gui.buttonHover()
 end
 
 function love.mousepressed(x, y)
