@@ -2,6 +2,7 @@ gameover = {}
 
 function gameover.load()
 	if state == "gameover" then
+		gui.buttons = {}
 		gui.newButton("Ressurect!", 100, 200, "ressurect")
 		gui.newButton("Back to menu", 360, 200, "menu")
 	end
