@@ -10,17 +10,17 @@ require("facts")
 
 gui = require "libs/GUI"
 
-debug = false
+debug = true
 
 function love.load()
-   state = "game"
-     
-   game.load()
-   title.load()
-   credits.load()
-   facts.load()
+   	state = "game"   
+ 
+   	game.load()
+   	title.load()
+   	credits.load()
+   	facts.load()
    
-   defaultFont = love.graphics.setNewFont("assets/fonts/OpenSans-Regular.ttf", 30)
+   	defaultFont = love.graphics.setNewFont("assets/fonts/OpenSans-Regular.ttf", 30)
 end
 
 function love.draw()

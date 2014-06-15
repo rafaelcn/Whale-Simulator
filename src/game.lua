@@ -7,21 +7,22 @@ require("gameover")
 game = {}
 
 function game.load()
-   krill.load()
-   whale.load()
-   boat.load()
-   gameover.load()
+   	krill.load()
+   	whale.load()
+   	boat.load()
+   	gameover.load()
    
-   seabed_spr = love.graphics.newImage("assets/textures/seabed.png")
-   seabed_spr:setFilter("nearest", "nearest")
+   	seabed_spr = love.graphics.newImage("assets/textures/seabed.png")
+   	seabed_spr:setFilter("nearest", "nearest")
    
-   local waves_spr = love.graphics.newImage("assets/textures/waves.png")
-   waves_spr:setFilter("nearest", "nearest")
-   waves_anim = newAnimation(waves_spr, 100, 100, 1, 3)
+   	local waves_spr = love.graphics.newImage("assets/textures/waves.png")
+   	waves_spr:setFilter("nearest", "nearest")
+   	waves_anim = newAnimation(waves_spr, 100, 100, 1, 3)
    
-   game.score = 0
-   game.round = 1
-   game.newround = 100
+   	game.score = 0
+   	game.round = 1
+   	game.newround = 100
+	game.timer = 0
 end
 
 function game.draw()
@@ -45,16 +46,19 @@ function game.draw()
 end
 
 function game.update(dt)
-   krill.update(dt)
-   whale.update(dt)
-   boat.update(dt)
-   waves_anim:update(dt)
-   if whale.isHurt ~= true then
-      if game.dist(whale.x, whale.y, boat.x, boat.y) < (16+16) then
-	      whale.health = whale.health - 40
-         whale.isHurt = true
-         whale.hurtRemaining = 2
-	   end
+   	krill.update(dt)
+   	whale.update(dt)
+   	boat.update(dt)
+
+	game.timer = game.timer + dt
+	
+   	waves_anim:update(dt)
+   	if whale.isHurt ~= true then
+      	if game.dist(whale.x, whale.y, boat.x, boat.y) < (16+16) then
+	     	whale.health = whale.health - 40
+   		 	whale.isHurt = true
+         	whale.hurtRemaining = 2
+	   	end
 	end
    
    for ei,ev in ipairs(krill.swarms) do
@@ -70,7 +74,6 @@ function game.update(dt)
 			   whale.y = 300
 			   whale.health = 100
 			   whale.hunger = 100
-			   table.remove(gesture)
 			   whale.dir = nil
             for k,v in pairs(krill.swarms) do krill.swarms[k]=nil end
 			   boat.x = math.random(0, 1000)
@@ -82,6 +85,12 @@ function game.update(dt)
 	end
 end
 
+-- definition of the distance between two points is: sqrt(deltaX^2 + deltaY^2)
 function game.dist(x1,y1,x2,y2)
-	return math.sqrt( (x1 - x2)^2 + (y1 - y2)^2 )
+	return math.sqrt((x2 - x1)^2 + (y2 - y1)^2)
 end
+
+function game.getTimer()	
+	return "Time passed: "..tostring(game.timer)
+end
+

@@ -13,10 +13,10 @@ function title.load()
    	
 	love.graphics.setFont(openSansBold)
 
-	gui.newButton(menu.newGame, 300, 300, "start") 
-	gui.newButton(menu.options, 300, 340, "options")
-	gui.newButton(menu.credits, 300, 380, "credits")
-	gui.newButton(menu.exit, 300, 420, "quit")
+	gui.newButton(menu.newGame, 200, 300, "start") 
+	gui.newButton(menu.options, 200, 340, "options")
+	gui.newButton(menu.credits, 200, 380, "credits")
+	gui.newButton(menu.exit, 200, 420, "quit")
 end
 
 function title.draw()

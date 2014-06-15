@@ -24,16 +24,17 @@ function whale.draw()
 	local whaleImage = love.graphics.newImage("assets/textures/simple_whale.png")
 	
 	if debug == true then
-		love.graphics.print("atan2: ", 10, 40)
-		love.graphics.print(angle, 100, 40)
-		love.graphics.print("MouseX: ", 10, 60)
-		love.graphics.print(mouseX, 100, 60)
-		love.graphics.print("MouseY: ", 10, 80)
-		love.graphics.print(mouseY, 100, 80)
+		love.graphics.print("atan2: "..tostring(angle), 10, 40)
+		love.graphics.print("MouseX: "..tostring(mouseX), 10, 60)
+		love.graphics.print("MouseY: "..tostring(mouseY), 10, 80)
+		love.graphics.print("WhaleX: "..tostring(whale.x), 10, 100)
+		love.graphics.print("WhaleY: "..tostring(whale.y), 10, 120)
+		love.graphics.print("Distance: "..tostring(distance), 10, 140)
+		love.graphics.print(game.getTimer(), 10, 160)
 	end
 
-	love.graphics.draw(whaleImage, whale.x, whale.y, angle, 1, 1, 16, 32)
-	
+	--love.graphics.draw(whaleImage, whale.x, whale.y, angle+1, 1, 1, 16, 32)
+	love.graphics.draw(whaleImage, whale.x, whale.y, angle, 1, 1, 16, 0)
 end
 
 function whale.update(dt)
@@ -41,10 +42,21 @@ function whale.update(dt)
 	
 	mouseX = love.mouse.getX()
 	mouseY = love.mouse.getY()
-
-	angle = math.atan2(mouseY-whale.y, mouseX-whale.x)
-
 	
+	angle = math.atan2(mouseY-whale.y, mouseX-whale.x) 
+
+	-- finding the distance between the mouse and the whale
+	distance = dist(whale.x, mouseX, whale.y, mouseY)
+	
+	local whaleToMouse = {
+		x = mouseX - whale.x,
+		y = mouseY - whale.y
+	}
+
+	local fraction = 1/100
+	
+	whale.x = whale.x + (whaleToMouse.x * fraction)
+	whale.y = whale.y + (whaleToMouse.y * fraction)
 
 	if whale.x < 0 then
 		whale.x = 800
@@ -79,4 +91,10 @@ function whale.update(dt)
 	         whale.isHurt = false
 	      end
 	end
+end
+
+function dist(x1, x2, y1, y2)
+	deltaX = x2 - x1
+	deltaY = y2 - y1
+	return math.sqrt(((deltaX)^2)+((deltaY)^2))
 end

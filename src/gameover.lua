@@ -17,16 +17,6 @@ function gameover.draw()
 end
 
 function gameover.update(dt)
-  	--[[ swingers.update()
-	if swingers.checkGesture() then
-		gesture = swingers.getExtGesture()
-  	end
-   	if gesture[1] == "n" then
-    	state = "title"
-    	game.load()
-   	end
-	swingers.checkError()
-	]]
 
 	-- TODO: A resurrect and a back to menu button.
 	if state == "gameover" then
